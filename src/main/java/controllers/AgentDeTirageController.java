@@ -12,19 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import models.Administrateur;
+import models.AgentDeTirage;
 
 /**
  * Servlet implementation class AuthController
  */
 @WebServlet("/AuthController")
-public class AdministrateurController extends HttpServlet {
+public class AgentDeTirageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdministrateurController() {
+    public AgentDeTirageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,14 +42,14 @@ public class AdministrateurController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean trouve = false;
-		Administrateur currentUser = null;
+		AgentDeTirage currentUser = null;
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("password");
 		ServletContext application = getServletContext();
 		HttpSession session = request.getSession();
-		List<Administrateur> liste = (List<Administrateur>) application.getAttribute("listeUsers");
+		List<AgentDeTirage> liste = (List<AgentDeTirage>) application.getAttribute("listeUsers");
 		if (liste != null) {
-			for (Administrateur utilisateur : liste) {
+			for (AgentDeTirage utilisateur : liste) {
 				if(utilisateur.getLogin().equals(login) && utilisateur.getMotDePasse().equals(pwd)) {
 					trouve = true;
 					currentUser = utilisateur;

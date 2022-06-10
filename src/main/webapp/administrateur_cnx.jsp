@@ -63,7 +63,7 @@
 				</div>
 				<hr>
 				<form class="form-horizontal"
-					action="/Administrateur/Authentification">
+					method="post" action="/AuthController">
 					<fieldset>
 						<!-- Form Name -->
 						<legend>Authentification Administrateur</legend>
@@ -80,7 +80,7 @@
 							<label class="col-md-4 control-label" for="motdepasse">Mot
 								de passe</label>
 							<div class="col-md-4">
-								<input id="motdepasse" name="motdepasse" type="password"
+								<input id="password" name="password" type="password"
 									class="form-control input-md" required="required">
 							</div>
 						</div>
