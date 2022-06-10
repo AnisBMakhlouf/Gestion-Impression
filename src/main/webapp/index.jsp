@@ -37,7 +37,7 @@
 								</form>
 							</td>
 							<td>
-								<form action="enseignant_cnx">
+								<form action="enseignant_cnx.jsp">
 									<fieldset>
 										<label for="sub"></label> <input name="sub" id="sub"
 											type="submit" class="form-control input-md"

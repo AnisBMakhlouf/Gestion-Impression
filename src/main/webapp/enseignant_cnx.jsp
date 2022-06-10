@@ -8,6 +8,11 @@
 <link href="/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+<%
+if (request.getAttribute("erreur") != null) {
+	out.append(request.getAttribute("erreur").toString());
+}
+%>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -19,7 +24,7 @@
 					<table id="mytable" class="table table-bordred table-striped">
 						<tr>
 							<td>
-								<form action="administrateur_cnx">
+								<form action="administrateur_cnx.jsp">
 									<fieldset>
 										<label for="sub"></label> <input name="sub" id="sub"
 											type="submit" class="form-control input-md"
@@ -28,7 +33,7 @@
 								</form>
 							</td>
 							<td>
-								<form action="agentdetirage_cnx">
+								<form action="agentdetirage_cnx.jsp">
 									<fieldset>
 										<label for="sub"></label> <input name="sub" id="sub"
 											type="submit" class="form-control input-md"
@@ -37,7 +42,7 @@
 								</form>
 							</td>
 							<td>
-								<form action="enseignant_cnx">
+								<form action="enseignant_cnx.jsp">
 									<fieldset>
 										<label for="sub"></label> <input name="sub" id="sub"
 											type="submit" class="form-control input-md"
@@ -57,7 +62,7 @@
 					</table>
 				</div>
 				<hr>
-				<form class="form-horizontal" action="/Enseignant/Authentification">
+				<form class="form-horizontal" method="post"  action="/Enseignant/Authentification">
 					<fieldset>
 						<!-- Form Name -->
 						<legend>Authentification Enseignant</legend>

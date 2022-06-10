@@ -14,9 +14,9 @@ public class EnseignantDao {
 		ResultSet rs;
 		try {
 			rs = JDBCUtil.getStatement().executeQuery(query);
-			//if(rs.next()) {
-				//u=new Enseignant(rs.getString(1), query, log, pwd, null);
-			//}
+			if(rs.next()) {
+				u=new Enseignant(rs.getString(1), query, log, pwd, null);
+			}
 } catch (SQLException e) {
 // TODO Auto-generated catch block
 	e.printStackTrace();
