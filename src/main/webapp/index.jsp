@@ -19,7 +19,7 @@
 					<table id="mytable" class="table table-bordred table-striped">
 						<tr>
 							<td>
-								<form action="administrateur_cnx">
+								<form action="administrateur_cnx.jsp">
 									<fieldset>
 										<label for="sub"></label> <input name="sub" id="sub"
 											type="submit" class="form-control input-md"
@@ -28,7 +28,7 @@
 								</form>
 							</td>
 							<td>
-								<form action="agentdetirage_cnx">
+								<form action="agentdetirage_cnx.jsp">
 									<fieldset>
 										<label for="sub"></label> <input name="sub" id="sub"
 											type="submit" class="form-control input-md"

@@ -25,23 +25,4 @@ public class DocumentDAO {
 }
 		return u;}
 
-	public List<Document> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Document findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void save(Document document) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void deleteById(int id) {
-		// TODO Auto-generated method stub
-		
-	}
 }

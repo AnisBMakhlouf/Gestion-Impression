@@ -17,7 +17,7 @@ import models.Administrateur;
 /**
  * Servlet implementation class AuthController
  */
-@WebServlet("/AuthController")
+@WebServlet("/Administrateur/Authentification")
 public class AdministrateurController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

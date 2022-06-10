@@ -63,7 +63,7 @@
 				</div>
 				<hr>
 				<form class="form-horizontal"
-					method="post" action="/AuthController">
+					method="post" action="/Administrateur/Authentification">
 					<fieldset>
 						<!-- Form Name -->
 						<legend>Authentification Administrateur</legend>
