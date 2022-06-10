@@ -2,6 +2,8 @@ package dao;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import models.Document;
 
 import util.JDBCUtil;
@@ -22,4 +24,24 @@ public class DocumentDAO {
 	e.printStackTrace();
 }
 		return u;}
+
+	public List<Document> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Document findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void save(Document document) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteById(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 }
