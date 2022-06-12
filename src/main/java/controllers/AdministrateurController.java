@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import models.Administrateur;
+import models.Utilisateur;
 
 /**
  * Servlet implementation class AuthController
  */
-@WebServlet("/Administrateur/Authentification")
+@WebServlet(urlPatterns = { "/Administrateur/Authentification" })
 public class AdministrateurController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,23 +44,24 @@ public class AdministrateurController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		boolean trouve = false;
-		Administrateur currentUser = null;
+		Utilisateur currentUser = null;
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("password");
 		ServletContext application = getServletContext();
 		HttpSession session = request.getSession();
-		Administrateur admin = null;
+		Utilisateur user = null;
+		String path = request.getServletPath();
+		if (path.equals("/Administrateur/Authentification")) {
 		try {
-			admin = AdministrateurDAO.FindByLoginPwd(login, pwd);
+			user = AdministrateurDAO.FindByLoginPwd(login, pwd);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (admin != null) {
-			
-				session.setAttribute("currentUser", admin);
-				//response.sendRedirect("bienvenue.jsp");
-				getServletContext().getRequestDispatcher("/tableau_admin.jsp").forward(request, response);
+		if ( user != null) {
+			session.setAttribute("currentUser", user);
+				//getServletContext().getRequestDispatcher("/tableau_admin.jsp").forward(request, response);
+			response.sendRedirect("/IITGestionImpression/tableau_admin.jsp");
 			
 		}
 		else {
@@ -69,5 +70,6 @@ public class AdministrateurController extends HttpServlet {
 		}
 		
 	}
+		}
 
 }

@@ -12,7 +12,7 @@ public class EnseignantDao {
 
 	public static Utilisateur FindByLoginPwd(String log,String pwd) throws SQLException {
 		Utilisateur u = null;
-		String query ="Select * from utilisateur where login = '"+log+"' and password ='"+pwd+"' and Role = 'Enseignant'";
+		String query ="Select * from utilisateur where login = '"+log+"' and password ='"+pwd+"' and Role ='Enseignant'";
 		ResultSet rs;
 		try {
 			rs = JDBCUtil.getStatement().executeQuery(query);

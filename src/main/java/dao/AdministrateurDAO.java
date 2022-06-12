@@ -10,12 +10,15 @@ public class AdministrateurDAO {
 
 	public static Administrateur FindByLoginPwd(String log,String pwd) throws SQLException {
 		Administrateur u = null;
-		String query ="Select * from utilisateur where login = '"+log+"' and password ='"+pwd+"' and Role = 'Admin'";
+		String query ="Select * from utilisateur where login = '"+log+"' and password ='"+pwd+"' and Role ='Admin'";
 		ResultSet rs;
 		try {
 			rs = JDBCUtil.getStatement().executeQuery(query);
 			if(rs.next()) {
-				u=new Administrateur(log, pwd, 0);
+				u=new Administrateur();
+				u.setIdAdministrateur(rs.getInt("ID"));
+				u.setLogin(rs.getString("login"));
+				u.setRole(rs.getString("Role"));
 			}
 		} catch (SQLException e) {
 		// TODO Auto-generated catch block

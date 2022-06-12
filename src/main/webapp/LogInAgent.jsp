@@ -45,7 +45,7 @@
             <div class="wizard-container">
 
                 <div class="card wizard-card" data-color="blue" id="wizardProfile">
-                    <form method="post" action="${pageContext.request.contextPath}/Administrateur/Authentification">
+                    <form method="post" action="${pageContext.request.contextPath}/AgentDeTirage/Authentification">
                 <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
                     	<div class="wizard-header">
@@ -54,35 +54,34 @@
                         	</h3>
                     	</div>
 
-						<div class="wizard-navigation">
+						<div >
 							<ul>
-	                            <li><a href="#about" data-toggle="tab">Se connecter</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/LogInAdmin.jsp">Admin</a></li>
+	                            
+	                            <li><a href="${pageContext.request.contextPath}/LogInEns.jsp">Enseignant</a></li>
+	                            <li><a href="${pageContext.request.contextPath}/LogInAgent.jsp">Agent de tirage</a></li>
 	                        </ul>
 
 						</div>
 
                         <div class="tab-content">
-                            <div class="tab-pane" id="about">
                               <div class="row">
 
                                   <div class="col-sm-10 col-sm-offset-1">
                                         <div class="form-group">
                                           <label>Email </label>
-                                          <input name="login" type="email" class="form-control" placeholder="">
+                                          <input name="login" type="email" class="form-control" placeholder="" required>
                                       </div>
                                       <div class="form-group">
                                         <label>Mot de passe </label>
-                                        <input name="password" type="text" class="form-control" placeholder="">
+                                        <input name="password" type="password" class="form-control" placeholder="" required>
                                       </div>
-                                  </div>
-                                 
-                              </div>
+                                  </div>     
+                               
                             </div>
-                            
-                      
-                        <div class="wizard-footer height-wizard">
+                             <div class="wizard-footer height-wizard">
                             <div class="pull-right">
-                                <input type='submit' class='btn btn-finish btn-fill btn-primary btn-wd btn-sm' value='Connecter' />
+                                <input type='submit' class='btn btn-next btn-fill btn-primary btn-wd btn-sm' name='next' value='Connecter' />
                             </div>
 
                             <div class="clearfix"></div>

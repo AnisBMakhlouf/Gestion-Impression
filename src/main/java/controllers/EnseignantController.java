@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import models.Enseignant;
+import models.Utilisateur;
 
 /**
  * Servlet implementation class AuthController
  */
-@WebServlet("/Enseignant/Authentification")
+@WebServlet(urlPatterns = { "/Enseignant/Authentification","/Enseignants", "/Enseignant/Ajouter", "/Enseignant/Modifier/*" })
 public class EnseignantController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,9 +50,13 @@ public class EnseignantController extends HttpServlet {
 		String pwd = request.getParameter("password");
 		ServletContext application = getServletContext();
 		HttpSession session = request.getSession();
-		Enseignant ens = null;
+		Utilisateur ens = null;
+		String path = request.getServletPath();
+		
+		//Auth
+		if (path.equals("/Enseignant/Authentification")) {
 		try {
-			ens = (Enseignant) EnseignantDao.FindByLoginPwd(login, pwd);
+			ens = EnseignantDao.FindByLoginPwd(login, pwd);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,7 +65,8 @@ public class EnseignantController extends HttpServlet {
 			
 				session.setAttribute("currentUser", ens);
 				//response.sendRedirect("bienvenue.jsp");
-				getServletContext().getRequestDispatcher("/tableau_ens.jsp").forward(request, response);
+				//getServletContext().getRequestDispatcher("/tableau_ens.jsp").forward(request, response);
+				response.sendRedirect("/IITGestionImpression/tableau_ens.jsp");
 			
 		}
 		else {
@@ -68,6 +74,31 @@ public class EnseignantController extends HttpServlet {
 			getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 		}
 		
-	}
+			}
+		
+		
+		//Get All
+				if (path.equals("/Enseignants")) {
+					List<Utilisateur> listens = null;
+				try {
+					listens = EnseignantDao.GetAllEns();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (ens != null) {
+					
+						session.setAttribute("listens", listens);
+					
+				}
+				else {
+					request.setAttribute("erreur", "Aucun utilisateur n'est inscrit !!!");
+					getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+				}
+				
+					}
+				}
+	
+	
 
 }

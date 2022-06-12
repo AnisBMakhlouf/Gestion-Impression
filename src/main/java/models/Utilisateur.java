@@ -12,6 +12,7 @@ public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String login;
 	private String motDePasse;
+	private String role;
 
 	public Utilisateur() {
 		super();
@@ -21,6 +22,7 @@ public class Utilisateur implements Serializable {
 		super();
 		this.login = login;
 		this.motDePasse = motDePasse;
+		this.role = role;
 	}
 
 	public String getLogin() {
@@ -29,6 +31,14 @@ public class Utilisateur implements Serializable {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getMotDePasse() {
