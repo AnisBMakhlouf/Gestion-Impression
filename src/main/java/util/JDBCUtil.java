@@ -7,9 +7,9 @@ public class JDBCUtil {
 public static Statement getStatement() {
 Statement stmt = null;
 try {
-Class.forName("com.mysql.cj.jdbc.Driver");
-Connection ctx = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestionimpression","root","");
-stmt = ctx.createStatement();
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	Connection ctx = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestionimpression","root","");
+	stmt = ctx.createStatement();
 } catch (ClassNotFoundException | SQLException e) {
 // TODO Auto-generated catch block
 e.printStackTrace();

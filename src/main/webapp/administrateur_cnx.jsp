@@ -63,7 +63,7 @@
 				</div>
 				<hr>
 				<form class="form-horizontal"
-					method="post" action="/Administrateur/Authentification">
+					method="post" action="${pageContext.request.contextPath}/Administrateur/Authentification">
 					<fieldset>
 						<!-- Form Name -->
 						<legend>Authentification Administrateur</legend>

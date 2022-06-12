@@ -1,51 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link href="C:\Anis Ben Makhlouf\D-ING-IIT\JEE\Gestion-Impression\src\main\resources\static\css\bootstrap.min.css" rel="stylesheet" />
-<title>Authentification</title>
+<title>Tableau de bord</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<hr>
-				<h3 class="text-danger text-center">Bienvenue, Veuillez vous
-					identifier SVP!</h3>
+				<h3 class="text-danger text-center">Tableau d'administration</h3>
 				<hr>
 				<div class="table-responsive">
 					<table id="mytable" class="table table-bordred table-striped">
 						<tr>
 							<td>
-								<form action="administrateur_cnx.jsp">
+								<form method="post" action="${pageContext.request.contextPath}/Enseignants">
 									<fieldset>
 										<label for="sub"></label> <input name="sub" id="sub"
 											type="submit" class="form-control input-md"
-											value="Administrateur" />
+											value="Enseignants" />
 									</fieldset>
 								</form>
 							</td>
 							<td>
-								<form action="agentdetirage_cnx.jsp">
+								<form action="/AgentsDeTirage">
 									<fieldset>
 										<label for="sub"></label> <input name="sub" id="sub"
 											type="submit" class="form-control input-md"
-											value="Agent de tirage" />
+											value="Agents de tirage" />
 									</fieldset>
 								</form>
 							</td>
 							<td>
-								<form action="enseignant_cnx.jsp">
+								<form action="/Matieres">
 									<fieldset>
 										<label for="sub"></label> <input name="sub" id="sub"
-											type="submit" class="form-control input-md"
-											value="Enseignant" />
+											type="submit" class="form-control input-md" value="Matieres" />
 									</fieldset>
 								</form>
 							</td>
+							<td>
+								<form action="/Groupes">
+									<fieldset>
+										<label for="sub"></label> <input name="sub" id="sub"
+											type="submit" class="form-control input-md" value="Groupes" />
+									</fieldset>
+								</form>
+							</td>
+							<td>
+								<form action="/">
+									<fieldset>
+										<label for="sub"></label> <input name="sub" id="sub"
+											type="submit" class="form-control input-md" value="Déconnexion" />
+									</fieldset>
+								</form>
+							</td>							
 						</tr>
 					</table>
 				</div>
@@ -53,7 +66,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.js" type="text/javascript"></script>
 	<script src="/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

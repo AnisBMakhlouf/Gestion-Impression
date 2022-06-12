@@ -1,6 +1,7 @@
 package controllers;
-
+import dao.AdministrateurDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,30 +42,26 @@ public class AdministrateurController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		boolean trouve = false;
 		Administrateur currentUser = null;
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("password");
 		ServletContext application = getServletContext();
 		HttpSession session = request.getSession();
-		List<Administrateur> liste = (List<Administrateur>) application.getAttribute("listeUsers");
-		if (liste != null) {
-			for (Administrateur utilisateur : liste) {
-				if(utilisateur.getLogin().equals(login) && utilisateur.getMotDePasse().equals(pwd)) {
-					trouve = true;
-					currentUser = utilisateur;
-					break;
-				}
-			}
-			if(trouve) {
-				session.setAttribute("currentUser", currentUser);
-				response.sendRedirect("bienvenue.jsp");
-			}
-			else
-			{
-				request.setAttribute("erreur", "Erreur d'authentification !!!");
-				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-			}
+		Administrateur admin = null;
+		try {
+			admin = AdministrateurDAO.FindByLoginPwd(login, pwd);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (admin != null) {
+			
+				session.setAttribute("currentUser", admin);
+				//response.sendRedirect("bienvenue.jsp");
+				getServletContext().getRequestDispatcher("/tableau_admin.jsp").forward(request, response);
+			
 		}
 		else {
 			request.setAttribute("erreur", "Aucun utilisateur n'est inscrit !!!");

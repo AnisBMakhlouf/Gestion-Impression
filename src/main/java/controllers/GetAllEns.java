@@ -1,8 +1,7 @@
 package controllers;
-import dao.EnseignantDao;
+
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -13,19 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.EnseignantDao;
 import models.Enseignant;
+import models.Utilisateur;
 
 /**
- * Servlet implementation class AuthController
+ * Servlet implementation class GetAllEns
  */
-@WebServlet("/Enseignant/Authentification")
-public class EnseignantController extends HttpServlet {
+@WebServlet("/Enseignants")
+public class GetAllEns extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnseignantController() {
+    public GetAllEns() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,32 +43,17 @@ public class EnseignantController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		boolean trouve = false;
-		Enseignant currentUser = null;
-		String login = request.getParameter("login");
-		String pwd = request.getParameter("password");
 		ServletContext application = getServletContext();
 		HttpSession session = request.getSession();
-		Enseignant ens = null;
+		List<Utilisateur> enseignants = null;
 		try {
-			ens = (Enseignant) EnseignantDao.FindByLoginPwd(login, pwd);
+			enseignants =  EnseignantDao.GetAllEns();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (ens != null) {
-			
-				session.setAttribute("currentUser", ens);
-				//response.sendRedirect("bienvenue.jsp");
-				getServletContext().getRequestDispatcher("/tableau_ens.jsp").forward(request, response);
-			
-		}
-		else {
-			request.setAttribute("erreur", "Aucun utilisateur n'est inscrit !!!");
-			getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-		}
-		
+		session.setAttribute("enseignants", enseignants);
+		getServletContext().getRequestDispatcher("/listeEnseignants.jsp").forward(request, response);
 	}
 
 }
