@@ -6,17 +6,19 @@ import java.util.Date;
 public class DemandeDeTirage implements Serializable {
 
 	int id;
-	String matiere, classe, fichier;
+	String matiere, classe, fichier, enseignant, date,status;
 	int nbcopie, utilisateur_id;
-	Date date;
 
-	public DemandeDeTirage(int id, String matiere, String classe, String fichier, int nbcopie, int utilisateur_id) {
+	public DemandeDeTirage(int id, String matiere, String classe, String fichier,String enseignant,String date,String status, int nbcopie, int utilisateur_id) {
 		super();
 		this.id = id;
 		this.matiere = matiere;
 		this.classe = classe;
 		this.fichier = fichier;
 		this.nbcopie = nbcopie;
+		this.enseignant = enseignant;
+		this.date = date;
+		this.status = status;
 		this.utilisateur_id = utilisateur_id;
 	}
 
@@ -38,6 +40,22 @@ public class DemandeDeTirage implements Serializable {
 
 	public void setClasse(String classe) {
 		this.classe = classe;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public String getEnseignant() {
+		return enseignant;
+	}
+
+	public void setEnseignant(String enseignant) {
+		this.enseignant = enseignant;
 	}
 
 	public String getFichier() {
@@ -72,11 +90,11 @@ public class DemandeDeTirage implements Serializable {
 		this.utilisateur_id = utilisateur_id;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

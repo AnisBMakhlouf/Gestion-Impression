@@ -59,12 +59,15 @@ public class DemandeDeTirageController extends HttpServlet {
 		if (path.equals("/ajouterDemande")) {
 			String matiere = request.getParameter("matiere");
 			String classe = request.getParameter("classe");
+			String enseignant = request.getParameter("enseignant");
+			String status = request.getParameter("Status");
+			String date = request.getParameter("date");
 			int nbcopie = Integer.parseInt(request.getParameter("nbcopie"));
 			String fihier = request.getParameter("fichier");
 			int utilisateur_id = Integer.parseInt(request.getParameter("enseignant"));
 			
 
-			DemandeDeTirage u = new DemandeDeTirage(0, matiere, classe, fihier,nbcopie,  utilisateur_id);
+			DemandeDeTirage u = new DemandeDeTirage(0, matiere, classe, fihier,enseignant, date,status,nbcopie,  utilisateur_id);
 			try {
 				DemandeDeTirageDAO.save(u);
 			} catch (SQLException e) {

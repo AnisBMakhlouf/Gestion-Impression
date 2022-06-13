@@ -4,18 +4,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import models.DemandeDeTirage;
 import util.JDBCUtil;
 
 public class DemandeDeTirageDAO {
 
 	public List<DemandeDeTirage> getAll() {
-		DemandeDeTirage[] tabdemande;
 
 		List<DemandeDeTirage> demandes = new ArrayList<DemandeDeTirage>();
 		try {
-			String query = " select * from demandesimpression";
+			String query = "SELECT * FROM `demandesimpression`";
 			System.out.println(query);
 			ResultSet rs = JDBCUtil.getStatement().executeQuery(query);
 			
@@ -23,14 +21,12 @@ public class DemandeDeTirageDAO {
 				DemandeDeTirage d = new DemandeDeTirage();
 				d.setId(rs.getInt("id"));
 				d.setClasse(rs.getString("classe"));
-				d.setMatiere(rs.getString("matiere"));
-				
+				d.setMatiere(rs.getString("matiere"));	
+				d.setEnseignant(rs.getString("enseignant"));
+				d.setStatus(rs.getString("Status"));	
+				d.setDate(rs.getString("date"));
 				d.setNbcopie(rs.getInt("nbcopie"));
-				d.setFichier(rs.getString("fichier"));
 
-				d.setUtilisateur_id(rs.getInt("utilisateur_id"));
-
-	
 				demandes.add(d);
 			}
 		} catch (Exception e) {

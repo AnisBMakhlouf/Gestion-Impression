@@ -1,15 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+
+<%@page import="dao.DemandeDeTirageDAO"%>
+<%@page import="models.DemandeDeTirage"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="assetsDashboard/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assetsDashboard/img/favicon.png">
   <title>
-    Argon Dashboard 2 by Creative Tim
+    Gestion Impression
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -80,7 +85,7 @@
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
               </div>
-              <span class="nav-link-text ms-1">Table matiéres</span>
+              <span class="nav-link-text ms-1">Table matiÃ©res</span>
             </a>
           </li>
           <li class="nav-item">
@@ -232,184 +237,63 @@
             <div class="col-12">
               <div class="card mb-4">
                 <div class="card-header pb-0">
-                  <h6>Authors table</h6>
-                  <div class="col-11 text-end">
-                    <a style="position:Right ;" class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Card</a>
+                  <h6>Demandes de Tirage</h6>
+                  <div class="col-12 text-end">
+                    <a style="position:Right ;" class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Ajouter une demande</a>
                   </div>
                   <br>
                 </div>
-               
+
                 <div class="card-body px-0 pt-0 pb-2">
                   <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
-                          <th class="text-secondary opacity-7"> PDF</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Enseignant</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Classe</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre Copie</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Matiere</th>
+                          <th class="text-secondary opacity-7">Fichier</th>
+                          <th class="text-secondary opacity-7">Status</th>
                         </tr>
                       </thead>
                       <tbody>
+                     		 <%
+										DemandeDeTirageDAO demandeTirageDAO = new DemandeDeTirageDAO();
+									List<DemandeDeTirage> demandeTirages = demandeTirageDAO.getAll();
+									for (DemandeDeTirage demande : demandeTirages) {
+								%>
                         <tr>
                           <td>
                             <div class="d-flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                              </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">John Michael</h6>
-                                <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                                <h6 class="mb-0 text-sm"><%=demande.getEnseignant()%></h6>
                               </div>
                             </div>
                           </td>
                           <td>
-                            <p class="text-xs font-weight-bold mb-0">Manager</p>
-                            <p class="text-xs text-secondary mb-0">Organization</p>
+                            <p class="text-xs font-weight-bold mb-0"><%=demande.getClasse()%></p>
                           </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success">Online</span>
+                          <td class="align-middle text-center">
+                            <p class="text-xs font-weight-bold mb-0"><%=demande.getNbcopie()%></p>
                           </td>
                           <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                           </td>
+                          <td class="align-middle text-center">
+                            <p class="text-xs font-weight-bold mb-0"><%=demande.getMatiere()%></p>
+                          </td>
                           <td class="align-middle">
                             <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
-                              </div>
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                                <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="text-xs font-weight-bold mb-0">Programator</p>
-                            <p class="text-xs text-secondary mb-0">Developer</p>
                           </td>
                           <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                          </td>
-                          <td class="align-middle">
-                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                             
-                            </a>
+                            <span class="badge badge-sm bg-gradient-success"><%=demande.getStatus()%></span>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user3">
-                              </div>
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                                <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="text-xs font-weight-bold mb-0">Executive</p>
-                            <p class="text-xs text-secondary mb-0">Projects</p>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success">Online</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                          </td>
-                          <td class="align-middle">
-                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user4">
-                              </div>
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Michael Levi</h6>
-                                <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="text-xs font-weight-bold mb-0">Programator</p>
-                            <p class="text-xs text-secondary mb-0">Developer</p>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success">Online</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                          </td>
-                          <td class="align-middle">
-                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user5">
-                              </div>
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Richard Gran</h6>
-                                <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="text-xs font-weight-bold mb-0">Manager</p>
-                            <p class="text-xs text-secondary mb-0">Executive</p>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                          </td>
-                          <td class="align-middle">
-                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user6">
-                              </div>
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                                <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="text-xs font-weight-bold mb-0">Programtor</p>
-                            <p class="text-xs text-secondary mb-0">Developer</p>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                          </td>
-                          <td class="align-middle">
-                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                          </td>
-                        </tr>
+                        <%
+									}
+									%>
                       </tbody>
                     </table>
                   </div>
