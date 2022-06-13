@@ -1,83 +1,59 @@
-package models;
+package dao;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DemandeDeTirage implements Serializable {
+import models.DemandeDeTirage;
+import util.JDBCUtil;
 
-	int id;
-	String matiere, classe, fichier;
-	int nbcopie, utilisateur_id;
-	Date date;
+public class DemandeDeTirageDAO {
 
-	public DemandeDeTirage(int id, String matiere, String classe, String fichier, int nbcopie, int utilisateur_id) {
-		super();
-		this.id = id;
-		this.matiere = matiere;
-		this.classe = classe;
-		this.fichier = fichier;
-		this.nbcopie = nbcopie;
-		this.utilisateur_id = utilisateur_id;
+	public List<DemandeDeTirage> getAll() {
+		DemandeDeTirage[] tabdemande;
+
+		List<DemandeDeTirage> demandes = new ArrayList<DemandeDeTirage>();
+		try {
+			String query = " select * from demandesimpression";
+			System.out.println(query);
+			ResultSet rs = JDBCUtil.getStatement().executeQuery(query);
+			
+			while (rs.next()) {
+				DemandeDeTirage d = new DemandeDeTirage();
+				d.setId(rs.getInt("id"));
+				d.setClasse(rs.getString("classe"));
+				d.setMatiere(rs.getString("matiere"));
+				
+				d.setNbcopie(rs.getInt("nbcopie"));
+				d.setFichier(rs.getString("fichier"));
+
+				d.setUtilisateur_id(rs.getInt("utilisateur_id"));
+
+	
+				demandes.add(d);
+			}
+		} catch (Exception e) {
+			System.out.println("erreur getAll demande()  !! ");
+		}
+		return demandes;
+
 	}
-
-	public DemandeDeTirage() {
-		super();
+	
+	
+	public static void save(DemandeDeTirage u) throws SQLException {
+		String query = " insert into demandetirage (id,matiere,classe,nbcopie,fichier,utilisateur_id) value (0,'" + u.getMatiere() + "','"
+				+ u.getClasse() + "','" + u.getNbcopie() + "','"+ u.getFichier() + "','"+ u.getUtilisateur_id() + "')";
+		JDBCUtil.getStatement().executeUpdate(query);
 	}
-
-	public String getMatiere() {
-		return matiere;
+	
+	public void supprimer(String id){
+		try{
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("erreur delete utilisateur");
+		}
 	}
-
-	public void setMatiere(String matiere) {
-		this.matiere = matiere;
-	}
-
-	public String getClasse() {
-		return classe;
-	}
-
-	public void setClasse(String classe) {
-		this.classe = classe;
-	}
-
-	public String getFichier() {
-		return fichier;
-	}
-
-	public void setFichier(String fichier) {
-		this.fichier = fichier;
-	}
-
-	public int getNbcopie() {
-		return nbcopie;
-	}
-
-	public void setNbcopie(int nbcopie) {
-		this.nbcopie = nbcopie;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getUtilisateur_id() {
-		return utilisateur_id;
-	}
-
-	public void setUtilisateur_id(int utilisateur_id) {
-		this.utilisateur_id = utilisateur_id;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
+	
 }
