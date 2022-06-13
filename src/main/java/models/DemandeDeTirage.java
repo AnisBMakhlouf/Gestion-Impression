@@ -5,58 +5,79 @@ import java.util.Date;
 
 public class DemandeDeTirage implements Serializable {
 
+	int id;
+	String matiere, classe, fichier;
+	int nbcopie, utilisateur_id;
+	Date date;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private int idDemandeDeTirage;
-	private AgentDeTirage agentDeTirage;
-	private Date dateArrivee;
+	public DemandeDeTirage(int id, String matiere, String classe, String fichier, int nbcopie, int utilisateur_id) {
+		super();
+		this.id = id;
+		this.matiere = matiere;
+		this.classe = classe;
+		this.fichier = fichier;
+		this.nbcopie = nbcopie;
+		this.utilisateur_id = utilisateur_id;
+	}
 
 	public DemandeDeTirage() {
-	}
-
-	public DemandeDeTirage(AgentDeTirage agentDeTirage, Date dateArrivee) {
-		this.agentDeTirage = agentDeTirage;
-		this.dateArrivee = (Date) dateArrivee.clone();
-	}
-
-	public DemandeDeTirage(int idDemandeDeTirage, AgentDeTirage agentDeTirage,Date dateArrivee) {
 		super();
-		this.idDemandeDeTirage = idDemandeDeTirage;
-		this.agentDeTirage = agentDeTirage;
-		this.dateArrivee = (Date) dateArrivee.clone();
 	}
 
-	public int getIdDemandeDeTirage() {
-		return idDemandeDeTirage;
+	public String getMatiere() {
+		return matiere;
 	}
 
-	public void setIdDemandeDeTirage(int idDemandeDeTirage) {
-		this.idDemandeDeTirage = idDemandeDeTirage;
+	public void setMatiere(String matiere) {
+		this.matiere = matiere;
 	}
 
-	public AgentDeTirage getAgentDeTirage() {
-		return agentDeTirage;
+	public String getClasse() {
+		return classe;
 	}
 
-	public void setAgentDeTirage(AgentDeTirage agentDeTirage) {
-		this.agentDeTirage = agentDeTirage;
+	public void setClasse(String classe) {
+		this.classe = classe;
 	}
 
-	public Date getDateArrivee() {
-		return (Date) dateArrivee.clone();
+	public String getFichier() {
+		return fichier;
 	}
 
-	public void setDateArrivee(Date dateArrivee) {
-		this.dateArrivee = (Date) dateArrivee.clone();
+	public void setFichier(String fichier) {
+		this.fichier = fichier;
 	}
 
-	@Override
-	public String toString() {
-		return "DemandeDeTirage [idDemandeDeTirage=" + idDemandeDeTirage + ", agentDeTirage=" + agentDeTirage
-				+ ", dateArrivee=" + dateArrivee + "]";
+	public int getNbcopie() {
+		return nbcopie;
+	}
+
+	public void setNbcopie(int nbcopie) {
+		this.nbcopie = nbcopie;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getUtilisateur_id() {
+		return utilisateur_id;
+	}
+
+	public void setUtilisateur_id(int utilisateur_id) {
+		this.utilisateur_id = utilisateur_id;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }
