@@ -2,41 +2,55 @@ package dao;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import models.DemandeDeTirage;
 import models.Utilisateur;
 
 import util.JDBCUtil;
 public class EnseignantDao {
 	
-
 	public static Utilisateur FindByLoginPwd(String log,String pwd) throws SQLException {
 		Utilisateur u = null;
 		String query ="Select * from utilisateur where login = '"+log+"' and password ='"+pwd+"' and Role ='Enseignant'";
 		ResultSet rs;
 		try {
-			rs = JDBCUtil.getStatement().executeQuery(query);
-			if(rs.next()) {
-				u=new Utilisateur(log, pwd);
+		rs = JDBCUtil.getStatement().executeQuery(query);
+		if(rs.next()) {
+		u=new Utilisateur(log, pwd);
+		}
+		} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+		return u;
+		}
+	public List<Utilisateur> GetAllEns() throws SQLException {
+		List<Utilisateur> ListUtilisateur = new ArrayList<Utilisateur>();
+		
+		try {
+		
+			String query ="SELECT * FROM `utilisateur` WHERE `Role` = 'Enseignant'";
+			System.out.println(query);
+			ResultSet rs = JDBCUtil.getStatement().executeQuery(query);
+		
+			while (rs.next()) {
+				Utilisateur u = new Utilisateur();
+				u.setId(rs.getInt("id"));
+				u.setNomComplet(rs.getString("fullName"));
+				u.setLogin(rs.getString("login"));
+				
+				u.setMotDePasse(rs.getString("password"));
+				ListUtilisateur.add(u);	
+				
+				
 			}
 		} catch (SQLException e) {
 		// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return u;
-	}
-	
-	public static List<Utilisateur> GetAllEns() throws SQLException {
-		List<Utilisateur> u = null;
-		String query ="ISELECT * FROM `utilisateur` WHERE `Role` = 'Enseignant'";
-		try {
-			u =  (List<Utilisateur>) JDBCUtil.getStatement().executeQuery(query);
-			
-		} catch (SQLException e) {
-		// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return u;
+		return ListUtilisateur;
 	}
 	
 	public static Utilisateur AddEnseignant(String fullname,String email, String password) throws SQLException {
