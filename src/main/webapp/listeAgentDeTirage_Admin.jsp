@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@page import="dao.EnseignantDao"%>
-<%@page import="models.Enseignant"%>
+	<%@page import="dao.AgentDeTirageDAO"%>
+<%@page import="models.AgentDeTirage"%>
 <%@page import="models.Utilisateur"%>
  <%@ page import="java.util.*"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -142,7 +142,8 @@
             <li class="nav-item d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
+                <%Utilisateur u = (Utilisateur) session.getAttribute("currentUser"); %>
+                <span class="d-sm-inline d-none"><%=u.getNomComplet()%></span>
               </a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -242,9 +243,9 @@
             <div class="col-12">
               <div class="card mb-4">
                 <div class="card-header pb-0">
-                  <h6>Authors table</h6>
+                  <h6>Agents de Tirage</h6>
                   <div class="col-12 text-end">
-                    <a style="position:Right ;" class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Ajouter enseignant</a>
+                    <a style="position:Right ;" class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Ajouter agent de tirage</a>
                   </div>
                   <br>
                 </div>
@@ -269,31 +270,31 @@
                       </thead>
                       <tbody>
                       <%
-                      EnseignantDao enseignantDao = new EnseignantDao();
-									List<Utilisateur>  enseignantList = enseignantDao.GetAllEns();
-									for (Utilisateur enseignant : enseignantList) {
+                      AgentDeTirageDAO agentDao = new AgentDeTirageDAO();
+									List<Utilisateur>  enseignantList = agentDao.GetAllAgents();
+									for (Utilisateur agents : enseignantList) {
 									%>
                         <tr>
                           <td>
                             <div class="d-flex px-2 py-1">
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm"><%=enseignant.getId()%></h6>
+                                <h6 class="mb-0 text-sm"><%=agents.getId()%></h6>
                               
                               </div>
                             </div>
                           </td>
                           <td>
-                            <p class="text-xs font-weight-bold mb-0"><%=enseignant.getNomComplet()%></p>
+                            <p class="text-xs font-weight-bold mb-0"><%=agents.getNomComplet()%></p>
                             
                           </td>
                            <td>
-                            <p class="text-xs font-weight-bold mb-0"><%=enseignant.getLogin()%></p>
+                            <p class="text-xs font-weight-bold mb-0"><%=agents.getLogin()%></p>
                             
                           </td>
                        
                           
                           <td class="align-middle text-center">
-                           <p class="text-xs font-weight-bold mb-0"><%=enseignant.getMotDePasse()%></p>
+                           <p class="text-xs font-weight-bold mb-0"><%=agents.getMotDePasse()%></p>
                           </td>
                           <td class="align-middle">
                             <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>

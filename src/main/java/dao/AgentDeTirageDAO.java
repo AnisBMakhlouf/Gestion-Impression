@@ -2,6 +2,7 @@ package dao;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Utilisateur;
@@ -27,16 +28,26 @@ public class AgentDeTirageDAO {
 	}
 	
 	public static List<Utilisateur> GetAllAgents() throws SQLException {
-		List<Utilisateur> u = null;
-		String query ="ISELECT * FROM `utilisateur` WHERE `Role` = 'AgentDeTirage'";
+		List<Utilisateur> ListUtilisateur = new ArrayList<Utilisateur>();
+		String query ="SELECT * FROM `utilisateur` WHERE `Role` = 'AgentDeTirage'";
 		try {
-			u =  (List<Utilisateur>) JDBCUtil.getStatement().executeQuery(query);
-			
+			ResultSet rs =   JDBCUtil.getStatement().executeQuery(query);
+			while (rs.next()) {
+				Utilisateur u = new Utilisateur();
+				u.setId(rs.getInt("id"));
+				u.setNomComplet(rs.getString("FullName"));
+				u.setLogin(rs.getString("login"));
+				
+				u.setMotDePasse(rs.getString("password"));
+				ListUtilisateur.add(u);	
+				
+				
+			}
 		} catch (SQLException e) {
 		// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return u;
+		return ListUtilisateur;
 	}
 	
 	public static Utilisateur AddAgentDeTirage(String fullname,String email, String password) throws SQLException {

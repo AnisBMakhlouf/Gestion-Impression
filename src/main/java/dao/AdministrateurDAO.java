@@ -19,6 +19,7 @@ public class AdministrateurDAO {
 				u.setIdAdministrateur(rs.getInt("ID"));
 				u.setLogin(rs.getString("login"));
 				u.setRole(rs.getString("Role"));
+				u.setNomComplet(rs.getString("FullName"));
 			}
 		} catch (SQLException e) {
 		// TODO Auto-generated catch block

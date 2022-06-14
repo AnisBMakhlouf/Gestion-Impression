@@ -26,19 +26,18 @@ public class EnseignantDao {
 		}
 		return u;
 		}
-	public List<Utilisateur> GetAllEns() throws SQLException {
+	public static List<Utilisateur> GetAllEns() throws SQLException {
 		List<Utilisateur> ListUtilisateur = new ArrayList<Utilisateur>();
 		
 		try {
 		
 			String query ="SELECT * FROM `utilisateur` WHERE `Role` = 'Enseignant'";
-			System.out.println(query);
 			ResultSet rs = JDBCUtil.getStatement().executeQuery(query);
 		
 			while (rs.next()) {
 				Utilisateur u = new Utilisateur();
 				u.setId(rs.getInt("id"));
-				u.setNomComplet(rs.getString("fullName"));
+				u.setNomComplet(rs.getString("FullName"));
 				u.setLogin(rs.getString("login"));
 				
 				u.setMotDePasse(rs.getString("password"));
