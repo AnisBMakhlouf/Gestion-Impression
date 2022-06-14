@@ -1,25 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-	<%@page import="dao.EnseignantDao"%>
-<%@page import="models.Enseignant"%>
+
+<%@page import="dao.DemandeDeTirageDAO"%>
+<%@page import="models.DemandeDeTirage"%>
 <%@page import="models.Utilisateur"%>
- <%@ page import="java.util.*"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@page import="java.util.List"%>
-	
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="assetsDashboard/img/apple-icon.png">
-
+  <link rel="icon" type="image/png" href="assetsDashboard/img/favicon.png">
   <title>
-   Gestion Impression
+    Gestion Impression
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -90,7 +86,7 @@
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
               </div>
-              <span class="nav-link-text ms-1">Table matiéres</span>
+              <span class="nav-link-text ms-1">Table matiÃ©res</span>
             </a>
           </li>
           <li class="nav-item">
@@ -242,67 +238,58 @@
             <div class="col-12">
               <div class="card mb-4">
                 <div class="card-header pb-0">
-                  <h6>Liste des enseignants</h6>
+                  <h6>Demandes de Tirage</h6>
                   <div class="col-12 text-end">
-                    <a style="position:Right ;" class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Ajouter enseignant</a>
+                    <a style="position:Right ;" class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Ajouter une demande</a>
                   </div>
                   <br>
                 </div>
-               	<%
-					if (request.getParameter("success") != null) {
-						if (request.getParameter("success").equals("vrai"))
-							out.print("<h6 class='m-0 font-weight-bold text-primary'>ajout d'utilsateur effectuer</h6>");
-					}
-					%>
+
                 <div class="card-body px-0 pt-0 pb-2">
                   <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> ID </th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nom Complet</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Login</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mot de passe</th>
-                          <th class="text-secondary opacity-7"></th>
-                          <th class="text-secondary opacity-7"></th>
+                       
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Classe</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre Copie</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Matiere</th>
+                          <th class="text-secondary opacity-7">Fichier</th>
+                          <th class="text-secondary opacity-7">Status</th>
                         </tr>
                       </thead>
                       <tbody>
-                      <%
-                      EnseignantDao enseignantDao = new EnseignantDao();
-									List<Utilisateur>  enseignantList = enseignantDao.GetAllEns();
-									for (Utilisateur enseignant : enseignantList) {
-									%>
+                  
+					
+                     		 <%
+                     		        Utilisateur u = (Utilisateur) session.getAttribute("currentUser");
+										DemandeDeTirageDAO demandeTirageDAO = new DemandeDeTirageDAO();
+									List<DemandeDeTirage> demandeTirages = demandeTirageDAO.getEnseignantDemande(u.getNomComplet());
+									for (DemandeDeTirage demande : demandeTirages) {
+								%>
                         <tr>
-                          <td>
-                            <div class="d-flex px-2 py-1">
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm"><%=enseignant.getId()%></h6>
-                              
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <p class="text-xs font-weight-bold mb-0"><%=enseignant.getNomComplet()%></p>
-                            
-                          </td>
-                           <td>
-                            <p class="text-xs font-weight-bold mb-0"><%=enseignant.getLogin()%></p>
-                            
-                          </td>
                        
-                          
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0"><%=demande.getClasse()%></p>
+                          </td>
                           <td class="align-middle text-center">
-                           <p class="text-xs font-weight-bold mb-0"><%=enseignant.getMotDePasse()%></p>
+                            <p class="text-xs font-weight-bold mb-0"><%=demande.getNbcopie()%></p>
+                          </td>
+                          <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <p class="text-xs font-weight-bold mb-0"><%=demande.getMatiere()%></p>
                           </td>
                           <td class="align-middle">
-                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
                           </td>
-                          <td class="align-middle">
-                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                          <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success"><%=demande.getStatus()%></span>
                           </td>
                         </tr>
- 									<%
+                        <%
 									}
 									%>
                       </tbody>

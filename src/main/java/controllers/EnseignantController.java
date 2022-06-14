@@ -1,5 +1,6 @@
 package controllers;
 import dao.EnseignantDao;
+import dao.DemandeDeTirageDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,11 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import models.Enseignant;
 import models.Utilisateur;
+import models.DemandeDeTirage;
 
 /**
  * Servlet implementation class AuthController
  */
-@WebServlet(urlPatterns = { "/Enseignant/Authentification","/Enseignants", "/Enseignant/Ajouter", "/Enseignant/Modifier/*" })
+@WebServlet(urlPatterns = { "/Enseignant/Authentification","/Enseignants", "/Enseignant/Ajouter", "/Enseignant/Modifier/*", "/Enseignant/MesDemandeDeTirage" })
 public class EnseignantController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -97,8 +99,34 @@ public class EnseignantController extends HttpServlet {
 				}
 				
 					}
+				
+				
+				if (path.equals("/Enseignant/MesDemandeDeTirage")) {
+					List<DemandeDeTirage> demandeList = null;
+				try {
+					
+					Utilisateur u = (Utilisateur) session.getAttribute("currentUser");
+					demandeList = DemandeDeTirageDAO.getEnseignantDemande(u.getNomComplet());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (ens != null) {
+					
+						session.setAttribute("demandeList", demandeList);
+					
+				}
+				else {
+					request.setAttribute("erreur", "Aucun utilisateur n'est inscrit !!!");
+					getServletContext().getRequestDispatcher("/tableau_admin.jsp").forward(request, response);
+				}
+				
+					}
+				}
+
+				
 				}
 	
-	
+
 
 }
